@@ -37,20 +37,12 @@ I ran Artisan commands to migrate tables, clear cache, and list routes.
 
 I verified API responses using JSON format in Postman.
 
-## 🔹 API Endpoints
-
-| Method | Endpoint | Description |
-| **POST** | `/api/todos` | Add a new todo |
-| **GET** | `/api/todos` | Get all todos |
-| **GET** | `/api/todos/{id}` | Get one todo by ID |
-| **PUT** | `/api/todos/{id}` | Update a todo |
-| **DELETE** | `/api/todos/{id}` | Delete a todo |
 
 
 
 🔹 Example in Postman
 **POST** `/api/todos`
-
+**post** '/api /todos'
 Body:
 ```json
 {
