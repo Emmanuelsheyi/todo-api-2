@@ -1,13 +1,14 @@
+# Use PHP 8.2 FPM
 FROM php:8.2-fpm
 
-# Install system dependencies
+# Install required system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
-    curl
-
-# Install Composer globally
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    curl \
+    libpq-dev \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql pdo_pgsql zip
 
 # Set working directory
 WORKDIR /var/www/html
@@ -15,9 +16,14 @@ WORKDIR /var/www/html
 # Copy project files
 COPY . .
 
-# Install PHP dependencies
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Expose port and start PHP server
+# Expose port 8000
 EXPOSE 8000
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
+# Start Laravel server
+CMD php artisan serve --host=0.0.0.0 --port=8000
