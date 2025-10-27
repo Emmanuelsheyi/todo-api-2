@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
 
+
+
 // Simple test route to confirm API is working
 Route::get('/check', function () {
     return response()->json(['status' => 'API is working!']);

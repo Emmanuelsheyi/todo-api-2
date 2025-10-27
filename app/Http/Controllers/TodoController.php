@@ -36,16 +36,22 @@ class TodoController extends Controller
     }
 
     // Update todo
-    public function update(Request $request, $id)
-    {
-        $todo = Todo::find($id);
-        if (!$todo) {
-            return response()->json(['message' => 'Todo not found'], 404);
-        }
-
-        $todo->update($request->all());
-        return response()->json($todo);
+   public function update(Request $request, $id)
+{
+    $todo = Todo::find($id);
+    if (!$todo) {
+        return response()->json(['message' => 'Todo not found'], 404);
     }
+
+    // Only update the fields that are provided
+    $todo->update([
+        'title' => $request->input('title', $todo->title),
+        'description' => $request->input('description', $todo->description),
+        'completed' => $request->input('completed', $todo->completed),
+    ]);
+
+    return response()->json($todo);
+}
 
     // Delete todo
     public function destroy($id)
