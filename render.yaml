@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: laravel-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
