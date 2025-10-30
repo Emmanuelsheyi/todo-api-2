@@ -3,7 +3,7 @@ FROM php:8.2-fpm
 
 # Install required system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
+    gits \
     unzip \
     curl \
     libpq-dev \
